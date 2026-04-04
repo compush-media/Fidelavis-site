@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fidelavis | Carte de fidélité NFC pour restaurants, commerces et avis Google</title>
+  <meta name="description" content="Fidelavis : la carte NFC qui fidélise vos clients, collecte des avis Google et installe votre mini-app sur leur téléphone. Sans engagement. Démo gratuite.">
+  <link rel="canonical" href="https://fidelavis.com/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "name": "Fidelavis",
+        "legalName": "Compush Media",
+        "url": "https://fidelavis.com",
+        "logo": "https://fidelavis.com/img/LogodeFidelavis%20.png",
+        "description": "Solution de fidélisation client NFC pour restaurants et commerces locaux",
+        "email": "contact@fidelavis.com",
+        "telephone": "+33744967170",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "61 Bd National",
+          "addressLocality": "La Garenne-Colombes",
+          "postalCode": "92250",
+          "addressCountry": "FR"
+        },
+        "sameAs": []
+      },
+      {
+        "@type": "WebSite",
+        "name": "Fidelavis",
+        "url": "https://fidelavis.com",
+        "description": "Carte NFC de fidélisation client pour restaurants, commerces et avis Google"
+      },
+      {
+        "@type": "Product",
+        "name": "Fidelavis — Carte de fidélité NFC",
+        "description": "Système complet de fidélisation client par carte NFC : programme de fidélité digital, collecte d'avis Google, notifications push, mini-app PWA, tableau de bord commerçant.",
+        "brand": {
+          "@type": "Brand",
+          "name": "Fidelavis"
+        },
+        "offers": [
+          {
+            "@type": "Offer",
+            "name": "Essentiel",
+            "price": "97",
+            "priceCurrency": "EUR",
+            "priceSpecification": {
+              "@type": "UnitPriceSpecification",
+              "price": "97",
+              "priceCurrency": "EUR",
+              "billingDuration": "P1M"
+            },
+            "description": "10 cartes NFC, avis Google guidés, collecte contacts, fidélité digital, notifications push, coupons, mini-app PWA, emails automatisés 12 mois, dashboard. + 199€ installation.",
+            "availability": "https://schema.org/InStock"
+          },
+          {
+            "@type": "Offer",
+            "name": "Premium",
+            "price": "149",
+            "priceCurrency": "EUR",
+            "priceSpecification": {
+              "@type": "UnitPriceSpecification",
+              "price": "149",
+              "priceCurrency": "EUR",
+              "billingDuration": "P1M"
+            },
+            "description": "Tout le plan Essentiel + réponses automatiques aux avis Google, formation équipe, méthode de présentation client pour maximiser les inscriptions. + 199€ installation.",
+            "availability": "https://schema.org/InStock"
+          }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Est-ce que mes clients ont besoin de télécharger une application ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Non, aucune application à télécharger. Fidelavis fonctionne via une PWA (Progressive Web App) qui s'ouvre directement dans le navigateur du client après un scan NFC. Compatible avec tous les smartphones iPhone et Android."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Comment ça marche avec les avis Google ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Après son inscription via la carte NFC, le client est guidé vers votre fiche Google pour laisser un avis. Le parcours est optimisé pour maximiser le taux de conversion : jusqu'à 3 fois plus d'avis Google positifs."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Est-ce que c'est compliqué à installer ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Pas du tout. Vous recevez votre carte NFC Fidelavis entièrement préconfigurée. Vous la posez sur votre comptoir. C'est prêt en 5 minutes, aucune compétence technique requise."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Est-ce que je repars avec mes clients si je quitte Fidelavis ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Oui, vos données clients vous appartiennent intégralement. Si vous décidez de quitter Fidelavis, vous exportez l'intégralité de votre base de données clients. Aucune dépendance."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Qu'est-ce qui différencie Fidelavis d'une carte NFC avis Google ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Une carte NFC avis Google classique ne fait qu'ouvrir un lien. Fidelavis capte le contact du client, l'inscrit à votre programme de fidélité digital, installe votre mini-app sur son téléphone et vous permet de le recontacter par notification push."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Est-ce conforme au RGPD ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Oui, Fidelavis est 100 % conforme au RGPD. Toutes les données clients sont collectées avec consentement explicite, stockées en France sur des serveurs sécurisés et chiffrées."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Est-ce que je suis engagé ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Non, Fidelavis fonctionne sans aucun engagement. Vous pouvez résilier à tout moment par simple email et vous conservez l'intégralité de votre base de données clients."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <!-- ======================== NAVIGATION ======================== -->
+  <nav class="nav">
+    <div class="container nav__inner">
+      <a href="#" class="nav__logo"><img src="img/LogodeFidelavis .png" alt="Fidelavis" class="nav__logo-img"></a>
+      <ul class="nav__links">
+        <li><a href="#fonctionnalites" class="nav__link">Fonctionnalités</a></li>
+        <li><a href="#comment-ca-marche" class="nav__link">Comment ça marche</a></li>
+        <li><a href="#tarifs" class="nav__link">Tarifs</a></li>
+        <li><a href="#faq" class="nav__link">FAQ</a></li>
+        <li class="nav__cta"><a href="#demo" class="btn btn--primary btn--sm">Réserver ma démo</a></li>
+      </ul>
+      <button class="nav__burger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ======================== HERO ======================== -->
+  <section class="hero">
+    <div class="container hero__inner">
+      <div class="hero__content">
+        <div class="hero__badge reveal">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          Nouveau : fidélisation automatisée par NFC
+        </div>
+        <h1 class="hero__title reveal">La carte NFC qui fidélise vos clients et booste vos <span>avis Google.</span></h1>
+        <p class="hero__subtitle reveal">Un scan NFC suffit : votre client s'inscrit, laisse un avis Google, installe votre mini-app et rejoint votre programme de fidélité. Automatiquement. Sans application à télécharger.</p>
+        <div class="hero__ctas reveal">
+          <a href="#demo" class="btn btn--primary btn--lg">Réserver ma démo gratuite <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+          <a href="#comment-ca-marche" class="btn btn--secondary">Voir comment ça marche</a>
+        </div>
+        <div class="hero__proof reveal">
+          <div class="hero__proof-avatars">
+            <div class="hero__proof-avatar hero__proof-avatar--blue">M</div>
+            <div class="hero__proof-avatar hero__proof-avatar--green">S</div>
+            <div class="hero__proof-avatar hero__proof-avatar--purple">K</div>
+            <div class="hero__proof-avatar hero__proof-avatar--orange">L</div>
+          </div>
+          <div class="hero__proof-text"><strong>Adopté par des commerçants</strong> partout en France</div>
+        </div>
+      </div>
+      <div class="hero__visual">
+        <!-- Phone mockup with real screenshot -->
+        <div class="hero__phone reveal">
+          <img src="img/1etapefidelavis.png" alt="Application de fidélisation Fidelavis — Offre de bienvenue -10% sur smartphone" class="hero__phone-img">
+        </div>
+        <!-- Floating NFC Card — real photo -->
+        <div class="hero__nfc-card">
+          <img src="img/cartecarte.png" alt="Carte NFC Fidelavis pour fidélisation client restaurant et commerce" class="hero__nfc-card-img">
+        </div>
+        <!-- Floating Dashboard — real screenshot -->
+        <div class="hero__dashboard-card">
+          <img src="img/Tableau de bord du resto Fidélavis.png" alt="Tableau de bord commerçant Fidelavis — statistiques fidélisation et avis Google" class="hero__dashboard-card-img">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== TRUST BAR ======================== -->
+  <section class="trust-bar">
+    <div class="container trust-bar__inner">
+      <div class="trust-bar__item">
+        <svg class="trust-bar__icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        Installation en 5 minutes
+      </div>
+      <div class="trust-bar__item">
+        <svg class="trust-bar__icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        Sans engagement
+      </div>
+      <div class="trust-bar__item">
+        <svg class="trust-bar__icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        Compatible tout smartphone
+      </div>
+      <div class="trust-bar__item">
+        <svg class="trust-bar__icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        Conforme RGPD
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== STATS BAR ======================== -->
+  <section class="stats-bar">
+    <div class="container stats-bar__inner">
+      <div class="stat reveal">
+        <div class="stat__number" data-target="150" data-suffix="+">0</div>
+        <div class="stat__label">Commerces équipés</div>
+      </div>
+      <div class="stat reveal reveal-delay-1">
+        <div class="stat__number" data-target="12000" data-suffix="+">0</div>
+        <div class="stat__label">Clients captés</div>
+      </div>
+      <div class="stat reveal reveal-delay-2">
+        <div class="stat__number" data-target="4500" data-suffix="+">0</div>
+        <div class="stat__label">Avis Google générés</div>
+      </div>
+      <div class="stat reveal reveal-delay-3">
+        <div class="stat__number" data-target="9" data-suffix="/10">0</div>
+        <div class="stat__label">Commerçants renouvellent</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== WHAT IS FIDELAVIS ======================== -->
+  <section id="fonctionnalites" class="section">
+    <div class="container what-is__inner">
+      <div class="what-is__text reveal">
+        <span class="section-label">Qu'est-ce que Fidelavis ?</span>
+        <h2 class="section-title">Un système complet de fidélisation client, dans une seule carte NFC.</h2>
+        <p>Fidelavis remplace la carte de fidélité papier, le QR code et la carte NFC avis Google classique. Quand un client pose son téléphone sur votre carte NFC, il accède à votre espace de fidélisation personnalisé : inscription instantanée, programme de fidélité digital, collecte d'avis Google, coupons et offres exclusives.</p>
+        <p>Tout est automatisé. Vous construisez votre fichier client sans effort et vous pouvez recontacter vos clients par notification push — sans application à télécharger, sans matériel complexe, sans compétence technique.</p>
+      </div>
+      <div class="what-is__visual reveal">
+        <img src="img/admin3fidelavis.png" alt="Interface Fidelavis — tableau de bord commerçant et parcours de fidélisation client NFC" class="what-is__img what-is__img--admin">
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== HOW IT WORKS ======================== -->
+  <section id="comment-ca-marche" class="section section--alt">
+    <div class="container text-center">
+      <span class="section-label reveal">Comment ça marche</span>
+      <h2 class="section-title mx-auto reveal" style="max-width:600px">Opérationnel en 5 minutes. Vos clients fidélisés dès le premier jour.</h2>
+      <div class="steps__grid">
+        <div class="step reveal">
+          <div class="step__number">1</div>
+          <h3 class="step__title">Posez votre carte NFC Fidelavis</h3>
+          <p class="step__desc">Sur le comptoir, la table ou la vitrine. Aucune installation technique requise.</p>
+        </div>
+        <div class="step reveal reveal-delay-1">
+          <div class="step__number">2</div>
+          <h3 class="step__title">Votre client scanne avec son téléphone</h3>
+          <p class="step__desc">Un simple contact NFC ouvre votre page de fidélisation. Compatible iPhone et Android, sans application à télécharger.</p>
+        </div>
+        <div class="step reveal reveal-delay-2">
+          <div class="step__number">3</div>
+          <h3 class="step__title">Il s'inscrit, laisse un avis Google et rejoint votre fidélité</h3>
+          <p class="step__desc">Inscription en 10 secondes. Parcours guidé : avis Google, coupon de bienvenue, installation de votre mini-app PWA.</p>
+        </div>
+        <div class="step reveal reveal-delay-3">
+          <div class="step__number">4</div>
+          <h3 class="step__title">Vous le fidélisez avec des notifications push</h3>
+          <p class="step__desc">Envoyez des offres ciblées, des coupons et des rappels. Vos clients reviennent — et consomment plus.</p>
+        </div>
+      </div>
+      <div style="margin-top:48px" class="reveal">
+        <a href="#demo" class="btn btn--primary btn--lg">Réserver ma démo gratuite <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== BENEFITS ======================== -->
+  <section class="section">
+    <div class="container text-center">
+      <span class="section-label reveal">Résultats concrets</span>
+      <h2 class="section-title reveal">6 leviers concrets pour faire revenir vos clients</h2>
+      <p class="section-subtitle mx-auto reveal">Chaque fonctionnalité est conçue pour augmenter votre chiffre d'affaires et votre visibilité locale.</p>
+      <div class="benefits__grid" style="text-align:left">
+        <div class="benefit reveal">
+          <div class="benefit__icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+          </div>
+          <h3 class="benefit__title">Programme de fidélité digital</h3>
+          <p class="benefit__desc">Remplacez la carte à tamponner par un programme de fidélité digital avec points et récompenses. Vos clients cumulent des points à chaque visite et ont une raison concrète de revenir.</p>
+          <span class="benefit__highlight">Carte de fidélité NFC</span>
+        </div>
+        <div class="benefit reveal reveal-delay-1">
+          <div class="benefit__icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <h3 class="benefit__title">Collectez plus d'avis Google automatiquement</h3>
+          <p class="benefit__desc">Le parcours client intègre une demande d'avis Google au moment idéal. Plus d'avis positifs = meilleur référencement local Google Maps = plus de nouveaux clients.</p>
+          <span class="benefit__highlight">Avis Google NFC</span>
+        </div>
+        <div class="benefit reveal reveal-delay-2">
+          <div class="benefit__icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <h3 class="benefit__title">Constituez votre fichier client automatiquement</h3>
+          <p class="benefit__desc">Récupérez email et prénom de chaque client. Votre base de données client se remplit automatiquement à chaque scan NFC, avec consentement RGPD.</p>
+          <span class="benefit__highlight">Captation client NFC</span>
+        </div>
+        <div class="benefit reveal">
+          <div class="benefit__icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
+          </div>
+          <h3 class="benefit__title">Remplissez vos créneaux creux par notification push</h3>
+          <p class="benefit__desc">Mardi calme ? Envoyez une offre ciblée en un clic à toute votre base client. Les notifications push arrivent directement sur le téléphone de vos clients.</p>
+          <span class="benefit__highlight">Notifications push commerce</span>
+        </div>
+        <div class="benefit reveal reveal-delay-1">
+          <div class="benefit__icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></svg>
+          </div>
+          <h3 class="benefit__title">Votre mini-app installée sur leur téléphone</h3>
+          <p class="benefit__desc">Votre PWA (Progressive Web App) s'installe sur l'écran d'accueil de vos clients en un tap. Vous restez présent dans leur quotidien, sans frais d'App Store ni de Google Play.</p>
+          <span class="benefit__highlight">Mini-app PWA commerce</span>
+        </div>
+        <div class="benefit reveal reveal-delay-2">
+          <div class="benefit__icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
+          </div>
+          <h3 class="benefit__title">Tableau de bord commerçant en temps réel</h3>
+          <p class="benefit__desc">Dashboard clair avec vos statistiques : clients actifs, avis Google collectés, coupons utilisés, taux de retour. Pilotez votre fidélisation client avec des données concrètes.</p>
+          <span class="benefit__highlight">Dashboard commerçant</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== COMPARISON ======================== -->
+  <section class="section section--alt">
+    <div class="container text-center">
+      <span class="section-label reveal">Comparaison</span>
+      <h2 class="section-title reveal">Pourquoi Fidelavis est différent</h2>
+      <p class="section-subtitle mx-auto reveal">Une carte NFC avis Google ne fait qu'ouvrir un lien. Fidelavis est un système complet : fidélité, contacts, push, mini-app.</p>
+      <div class="comparison__table-wrap reveal">
+        <table class="comparison__table">
+          <thead>
+            <tr>
+              <th>Fonctionnalité</th>
+              <th>Carte avis Google</th>
+              <th>Carte fidélité papier</th>
+              <th>Fidelavis</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Avis Google guidés</td><td>Lien simple</td><td class="cross">&#10005;</td><td class="check">Parcours optimisé</td></tr>
+            <tr><td>Captation de contacts</td><td class="cross">&#10005;</td><td class="cross">&#10005;</td><td class="check">&#10003; Automatique</td></tr>
+            <tr><td>Programme de fidélité</td><td class="cross">&#10005;</td><td>Carte à tamponner</td><td class="check">&#10003; Digital</td></tr>
+            <tr><td>Notifications push</td><td class="cross">&#10005;</td><td class="cross">&#10005;</td><td class="check">&#10003;</td></tr>
+            <tr><td>Coupons & offres</td><td class="cross">&#10005;</td><td class="cross">&#10005;</td><td class="check">&#10003;</td></tr>
+            <tr><td>Mini-app sur le téléphone</td><td class="cross">&#10005;</td><td class="cross">&#10005;</td><td class="check">&#10003; PWA</td></tr>
+            <tr><td>Dashboard commerçant</td><td class="cross">&#10005;</td><td class="cross">&#10005;</td><td class="check">&#10003;</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== CLIENT JOURNEY ======================== -->
+  <section class="section">
+    <div class="container text-center">
+      <span class="section-label reveal">L'expérience client</span>
+      <h2 class="section-title reveal">Ce que votre client vit en 30 secondes</h2>
+      <p class="section-subtitle mx-auto reveal">Du scan au retour en boutique : tout est conçu pour être fluide, rapide et efficace.</p>
+      <div class="demo__carousel">
+        <button class="demo__arrow demo__arrow--left" aria-label="Précédent">&#8249;</button>
+        <button class="demo__arrow demo__arrow--right" aria-label="Suivant">&#8250;</button>
+      <div class="demo__screens">
+        <div class="demo__screen demo__screen--img reveal">
+          <span class="demo__screen-number">1</span>
+          <img src="img/1etapefidelavis.png" alt="Étape 1 fidélisation NFC — Offre de bienvenue -10% sur téléphone client" class="demo__screen-img">
+          <h4 class="demo__screen-title">Il découvre l'offre</h4>
+          <p class="demo__screen-desc">-10% offert en posant son téléphone sur la carte NFC</p>
+        </div>
+        <div class="demo__screen demo__screen--img reveal reveal-delay-1">
+          <span class="demo__screen-number">2</span>
+          <img src="img/2etapefidelavis.png" alt="Étape 2 — Inscription client email et prénom en 10 secondes" class="demo__screen-img">
+          <h4 class="demo__screen-title">Il s'inscrit</h4>
+          <p class="demo__screen-desc">Prénom + email en 10 secondes</p>
+        </div>
+        <div class="demo__screen demo__screen--img reveal reveal-delay-2">
+          <span class="demo__screen-number">3</span>
+          <img src="img/3etapefidelavis.png" alt="Étape 3 — Installation mini-app PWA Fidelavis sur smartphone" class="demo__screen-img">
+          <h4 class="demo__screen-title">Il installe la PWA</h4>
+          <p class="demo__screen-desc">Votre app s'installe sur son téléphone</p>
+        </div>
+        <div class="demo__screen demo__screen--img reveal reveal-delay-3">
+          <span class="demo__screen-number">4</span>
+          <img src="img/4etapefidelavis.png" alt="Étape 4 — Mini-app Fidelavis installée sur écran d'accueil du client" class="demo__screen-img">
+          <h4 class="demo__screen-title">Votre app sur son écran</h4>
+          <p class="demo__screen-desc">Présent dans son quotidien, comme une vraie app</p>
+        </div>
+        <div class="demo__screen demo__screen--img reveal reveal-delay-4">
+          <span class="demo__screen-number">5</span>
+          <img src="img/5etapefidelavis.png" alt="Étape 5 — Coupon de fidélité du mois avec code PIN en caisse" class="demo__screen-img">
+          <h4 class="demo__screen-title">Il utilise son coupon</h4>
+          <p class="demo__screen-desc">Coupon du mois avec code PIN en caisse</p>
+        </div>
+        <div class="demo__screen demo__screen--img reveal reveal-delay-5">
+          <span class="demo__screen-number">6</span>
+          <img src="img/6etapefidelavis.png" alt="Étape 6 — Notification push envoyée au client pour le faire revenir" class="demo__screen-img">
+          <h4 class="demo__screen-title">Il reçoit vos offres</h4>
+          <p class="demo__screen-desc">Notification push pour le faire revenir</p>
+        </div>
+        <div class="demo__screen demo__screen--img reveal reveal-delay-6">
+          <span class="demo__screen-number">7</span>
+          <img src="img/7etapefidelavis.png" alt="Étape 7 — Client redirigé vers avis Google en 1 clic" class="demo__screen-img">
+          <h4 class="demo__screen-title">Il laisse un avis</h4>
+          <p class="demo__screen-desc">Redirection Google en 1 clic</p>
+        </div>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== USE CASES ======================== -->
+  <section class="section section--alt">
+    <div class="container text-center">
+      <span class="section-label reveal">Cas d'usage</span>
+      <h2 class="section-title reveal">La fidélisation NFC adaptée à votre activité</h2>
+      <div class="usecases__grid" style="text-align:center">
+        <div class="usecase reveal">
+          <svg class="usecase__icon" xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" x2="6" y1="1" y2="4"/><line x1="10" x2="10" y1="1" y2="4"/><line x1="14" x2="14" y1="1" y2="4"/></svg>
+          <h3 class="usecase__title">Restaurants & Cafés</h3>
+          <p class="usecase__desc">Carte de fidélité restaurant digitale, avis Google après chaque repas, notifications push pour remplir les créneaux calmes.</p>
+        </div>
+        <div class="usecase reveal reveal-delay-1">
+          <svg class="usecase__icon" xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="m2 7 4.41-4.41A2 2 0 0 1 7.83 2h8.34a2 2 0 0 1 1.42.59L22 7"/><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><path d="M15 22v-4a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v4"/><path d="M2 7h20"/></svg>
+          <h3 class="usecase__title">Commerces de proximité</h3>
+          <p class="usecase__desc">Remplacez la carte de fidélité papier par un programme digital. Recontactez vos clients par notification push et boostez votre fiche Google.</p>
+        </div>
+        <div class="usecase reveal reveal-delay-2">
+          <svg class="usecase__icon" xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          <h3 class="usecase__title">Salons & Beauté</h3>
+          <p class="usecase__desc">Fidélisation salon de coiffure et institut de beauté : offres anniversaire, rappels automatiques, avis Google après chaque prestation.</p>
+        </div>
+        <div class="usecase reveal reveal-delay-3">
+          <svg class="usecase__icon" xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+          <h3 class="usecase__title">Artisans & Services</h3>
+          <p class="usecase__desc">Collectez des avis Google après chaque intervention, restez dans l'esprit de vos clients et boostez votre référencement local.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== TESTIMONIALS ======================== -->
+  <section class="section">
+    <div class="container text-center">
+      <span class="section-label reveal">Témoignages</span>
+      <h2 class="section-title reveal">Ce qu'ils en disent</h2>
+      <div class="testimonials__grid" style="text-align:left">
+        <div class="testimonial reveal">
+          <div class="testimonial__metric">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m18 15-6-6-6 6"/></svg>
+            De 18 à 54 avis Google en 6 semaines
+          </div>
+          <div class="testimonial__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="testimonial__text">"On était coincés à 18 avis depuis des mois. Depuis qu'on a posé la carte sur les tables, les clients scannent naturellement en fin de repas. On en est à 54 aujourd'hui. Et on commence à voir des nouveaux clients qui nous citent nos avis."</p>
+          <div class="testimonial__author">
+            <img src="img/temoinagehomme1.png" alt="Marco D., La Trattoria, Lyon" class="testimonial__avatar-img">
+            <div>
+              <div class="testimonial__name">Marco D.</div>
+              <div class="testimonial__role">La Trattoria — Lyon 3e</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial reveal reveal-delay-1">
+          <div class="testimonial__metric">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m18 15-6-6-6 6"/></svg>
+            180 contacts collectés en 10 semaines
+          </div>
+          <div class="testimonial__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="testimonial__text">"Avant, je n'avais aucun moyen de recontacter mes clientes entre deux coupes. Maintenant j'ai une vraie base, et quand j'envoie une offre, les rendez-vous suivent dans la journée. C'est devenu un réflexe dans mon salon."</p>
+          <div class="testimonial__author">
+            <img src="img/temoinagefemme2.png" alt="Sarah M., Salon Lumière, Paris" class="testimonial__avatar-img">
+            <div>
+              <div class="testimonial__name">Sarah M.</div>
+              <div class="testimonial__role">Salon Lumière — Paris 11e</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial reveal reveal-delay-2">
+          <div class="testimonial__metric">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m18 15-6-6-6 6"/></svg>
+            Créneaux du mardi remplis dès la 1re semaine
+          </div>
+          <div class="testimonial__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="testimonial__text">"Le mardi matin c'était calme, systématiquement. J'ai envoyé une notification push le lundi soir avec une promo sur les viennoiseries. Le lendemain, rupture de stock à 10h. C'est bête mais ça change vraiment quelque chose."</p>
+          <div class="testimonial__author">
+            <img src="img/temoinagehomme2.png" alt="Karim B., Boulangerie du Cours, Marseille" class="testimonial__avatar-img">
+            <div>
+              <div class="testimonial__name">Karim B.</div>
+              <div class="testimonial__role">Boulangerie du Cours — Marseille</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== PRICING ======================== -->
+  <section id="tarifs" class="section section--alt">
+    <div class="container text-center">
+      <span class="section-label reveal">Tarifs</span>
+      <h2 class="section-title reveal">Le système complet. Sans engagement.</h2>
+      <p class="section-subtitle mx-auto reveal">Un seul abonnement, tout inclus. Vos données clients vous appartiennent. Résiliable à tout moment.</p>
+      <div class="pricing__grid">
+        <div class="pricing__card reveal">
+          <div class="pricing__card-header">
+            <h3 class="pricing__card-name">Essentiel</h3>
+            <p class="pricing__card-tagline">Le système Fidelavis pour démarrer et fidéliser efficacement.</p>
+          </div>
+          <div class="pricing__card-price">
+            <span class="pricing__amount">97</span>
+            <span class="pricing__currency">€</span>
+            <span class="pricing__period">/mois HT</span>
+          </div>
+          <ul class="pricing__features">
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              10 cartes NFC personnalisées incluses
+            </li>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Avis Google guidés (parcours optimisé)
+            </li>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Collecte automatique de contacts clients
+            </li>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Programme de fidélité digital
+            </li>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Notifications push & coupons
+            </li>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Mini-app PWA installée sur leur téléphone
+            </li>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Emails automatisés pendant 12 mois
+            </li>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Tableau de bord commerçant
+            </li>
+          </ul>
+          <a href="#demo" class="btn btn--secondary btn--lg pricing__cta">Réserver ma démo gratuite</a>
+          <p class="pricing__sans-engagement">+ 199 € d'installation · Sans engagement · Résiliable à tout moment</p>
+        </div>
+        <div class="pricing__card pricing__card--popular reveal reveal-delay-1">
+          <div class="pricing__badge">Le plus populaire</div>
+          <div class="pricing__card-header">
+            <h3 class="pricing__card-name">Premium</h3>
+            <p class="pricing__card-tagline">Le système Fidelavis + l'automatisation des avis + la méthode pour booster vos inscriptions.</p>
+          </div>
+          <div class="pricing__card-price">
+            <span class="pricing__amount">149</span>
+            <span class="pricing__currency">€</span>
+            <span class="pricing__period">/mois HT</span>
+          </div>
+          <ul class="pricing__features">
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Tout le plan Essentiel
+            </li>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Réponses automatiques aux avis Google
+            </li>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Formation de votre équipe
+            </li>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Méthode de présentation client pour maximiser les inscriptions
+            </li>
+          </ul>
+          <a href="#demo" class="btn btn--primary btn--lg pricing__cta">Réserver ma démo gratuite</a>
+          <p class="pricing__sans-engagement">+ 199 € d'installation · Sans engagement · Résiliable à tout moment</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== FAQ ======================== -->
+  <section id="faq" class="section">
+    <div class="container text-center">
+      <span class="section-label reveal">FAQ</span>
+      <h2 class="section-title reveal">Questions fréquentes</h2>
+      <div class="faq__list" style="text-align:left">
+        <div class="faq-item reveal">
+          <button class="faq-item__question">Est-ce que mes clients ont besoin de télécharger une application ?<svg class="faq-item__icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" x2="12" y1="5" y2="19"/><line x1="5" x2="19" y1="12" y2="12"/></svg></button>
+          <div class="faq-item__answer"><p>Non, aucune application à télécharger. Fidelavis fonctionne via une PWA (Progressive Web App) qui s'ouvre directement dans le navigateur du client après un scan NFC. Il peut l'ajouter à son écran d'accueil en un tap, sans passer par l'App Store ou Google Play. C'est compatible avec tous les smartphones iPhone et Android.</p></div>
+        </div>
+        <div class="faq-item reveal">
+          <button class="faq-item__question">Comment ça marche avec les avis Google ?<svg class="faq-item__icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" x2="12" y1="5" y2="19"/><line x1="5" x2="19" y1="12" y2="12"/></svg></button>
+          <div class="faq-item__answer"><p>Après son inscription via la carte NFC, le client est guidé vers votre fiche Google pour laisser un avis. Le parcours est optimisé pour maximiser le taux de conversion : le bon moment, la bonne expérience, le bon call-to-action. Résultat : jusqu'à 3 fois plus d'avis Google positifs, ce qui améliore votre référencement local sur Google Maps.</p></div>
+        </div>
+        <div class="faq-item reveal">
+          <button class="faq-item__question">Est-ce que c'est compliqué à installer ?<svg class="faq-item__icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" x2="12" y1="5" y2="19"/><line x1="5" x2="19" y1="12" y2="12"/></svg></button>
+          <div class="faq-item__answer"><p>Pas du tout. Vous recevez votre carte NFC Fidelavis entièrement préconfigurée avec votre établissement. Vous la posez sur votre comptoir, votre table ou votre vitrine. C'est prêt en 5 minutes, aucune compétence technique requise. Votre tableau de bord commerçant est accessible immédiatement.</p></div>
+        </div>
+        <div class="faq-item reveal">
+          <button class="faq-item__question">Est-ce que je repars avec mes clients si je quitte Fidelavis ?<svg class="faq-item__icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" x2="12" y1="5" y2="19"/><line x1="5" x2="19" y1="12" y2="12"/></svg></button>
+          <div class="faq-item__answer"><p>Oui, à 100 %. Vos données clients vous appartiennent intégralement. Si vous décidez de quitter Fidelavis, vous exportez l'intégralité de votre base de données clients (emails, historique fidélité). Aucune dépendance, aucun verrouillage. C'est votre fichier client.</p></div>
+        </div>
+        <div class="faq-item reveal">
+          <button class="faq-item__question">Qu'est-ce qui différencie Fidelavis d'une carte NFC avis Google ?<svg class="faq-item__icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" x2="12" y1="5" y2="19"/><line x1="5" x2="19" y1="12" y2="12"/></svg></button>
+          <div class="faq-item__answer"><p>Une carte NFC avis Google classique ne fait qu'ouvrir un lien vers votre fiche Google. Fidelavis va beaucoup plus loin : il capte le contact du client (email, prénom), l'inscrit automatiquement à votre programme de fidélité digital, installe votre mini-app PWA sur son téléphone, et vous permet de le recontacter par notification push avec des offres ciblées. C'est un vrai système de fidélisation client, pas juste un lien NFC.</p></div>
+        </div>
+        <div class="faq-item reveal">
+          <button class="faq-item__question">Est-ce conforme au RGPD ?<svg class="faq-item__icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" x2="12" y1="5" y2="19"/><line x1="5" x2="19" y1="12" y2="12"/></svg></button>
+          <div class="faq-item__answer"><p>Oui, Fidelavis est 100 % conforme au RGPD. Toutes les données clients sont collectées avec consentement explicite, stockées en France sur des serveurs sécurisés, et chiffrées. Vos clients peuvent exercer leurs droits d'accès, de rectification et de suppression à tout moment. Consultez notre <a href="politique-de-confidentialite.html">politique de confidentialité</a> pour plus de détails.</p></div>
+        </div>
+        <div class="faq-item reveal">
+          <button class="faq-item__question">Est-ce que je suis engagé ?<svg class="faq-item__icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" x2="12" y1="5" y2="19"/><line x1="5" x2="19" y1="12" y2="12"/></svg></button>
+          <div class="faq-item__answer"><p>Non, Fidelavis fonctionne sans aucun engagement. Vous pouvez résilier à tout moment par simple email. La résiliation prend effet à la fin de la période en cours. Et vous conservez l'intégralité de votre base de données clients.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== CTA FINAL ======================== -->
+  <section id="demo" class="cta-final">
+    <div class="container">
+      <h2 class="cta-final__title reveal">Prêt à transformer chaque client en client fidèle ?</h2>
+      <p class="cta-final__subtitle reveal">Réservez une démonstration gratuite de 15 minutes. On vous montre comment Fidelavis peut booster vos avis Google et votre fidélisation client. Sans engagement.</p>
+      <div class="reveal">
+        <a href="mailto:contact@fidelavis.com?subject=Demande de démo Fidelavis" class="btn btn--white btn--lg">Réserver ma démo gratuite <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+      </div>
+      <div class="cta-final__checks reveal">
+        <div class="cta-final__check">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Démo gratuite de 15 min
+        </div>
+        <div class="cta-final__check">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Sans engagement
+        </div>
+        <div class="cta-final__check">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Réponse sous 24h
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== SEO BLOCK ======================== -->
+  <section class="section seo-block">
+    <div class="container">
+      <h2 class="section-title text-center reveal">La fidélisation NFC pour les commerces locaux</h2>
+      <div class="seo-block__content reveal">
+        <p>Fidelavis est un système de fidélisation client par carte NFC, conçu pour les restaurants, commerces de proximité, salons et artisans. Une carte posée sur votre comptoir suffit : le client scanne, s'inscrit, rejoint votre programme de fidélité et laisse un avis Google — sans télécharger d'application, sans friction.</p>
+        <p>Contrairement à une carte NFC avis Google classique, Fidelavis construit une vraie relation : fichier client qui se remplit automatiquement, mini-app PWA sur le téléphone, notifications push pour faire revenir, tableau de bord pour piloter. Compatible iPhone et Android. Conforme RGPD. Sans engagement.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== FOOTER ======================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <div class="footer__brand">
+          <div class="footer__logo"><img src="img/logo Fidelavis300 x 90.png" alt="Fidelavis" class="footer__logo-img"></div>
+          <p>La solution de fidélisation client NFC pour restaurants, commerces locaux et artisans. Avis Google, programme de fidélité digital, notifications push.</p>
+        </div>
+        <div class="footer__col">
+          <h4>Produit</h4>
+          <a href="#fonctionnalites">Fonctionnalités</a>
+          <a href="#comment-ca-marche">Comment ça marche</a>
+          <a href="#tarifs">Tarifs</a>
+          <a href="#faq">FAQ</a>
+        </div>
+        <div class="footer__col">
+          <h4>Légal</h4>
+          <a href="mentions-legales.html">Mentions légales</a>
+          <a href="politique-de-confidentialite.html">Politique de confidentialité</a>
+          <a href="cgv.html">CGV</a>
+        </div>
+        <div class="footer__col">
+          <h4>Contact</h4>
+          <a href="mailto:contact@fidelavis.com">contact@fidelavis.com</a>
+          <a href="tel:+33744967170">07 44 96 71 70</a>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <span>&copy; 2026 Fidelavis — Une solution Compush Media</span>
+        <span>Fait avec soin pour les commerces locaux</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
