@@ -91,7 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function openModal() {
     if (!modal) return;
-    modal.hidden = false;
+    modal.classList.add('modal--visible');
     document.body.style.overflow = 'hidden';
     requestAnimationFrame(() => {
       requestAnimationFrame(() => modal.classList.add('modal--open'));
@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!modal) return;
     modal.classList.remove('modal--open');
     setTimeout(() => {
-      modal.hidden = true;
+      modal.classList.remove('modal--visible');
       document.body.style.overflow = '';
       // Reset form state
       const fc = document.getElementById('form-container');
