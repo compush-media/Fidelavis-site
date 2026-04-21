@@ -903,6 +903,7 @@ ul { list-style: none; }
   object-fit: contain;
   border-radius: var(--radius-sm);
   margin: 8px auto 12px;
+  background: #ffffff;
 }
 
 .demo__screen-icon {
