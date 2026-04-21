@@ -155,7 +155,7 @@
         <li><a href="#comment-ca-marche" class="nav__link">Comment ça marche</a></li>
         
         <li><a href="#faq" class="nav__link">FAQ</a></li>
-        <li class="nav__cta"><a href="#demo" class="btn btn--primary btn--sm">Réserver ma démo</a></li>
+        <li class="nav__cta"><a href="#" data-open-demo class="btn btn--primary btn--sm">Réserver ma démo</a></li>
       </ul>
       <button class="nav__burger" aria-label="Menu">
         <span></span><span></span><span></span>
@@ -174,7 +174,7 @@
         <h1 class="hero__title reveal">La carte NFC qui fidélise vos clients et booste vos <span>avis Google.</span></h1>
         <p class="hero__subtitle reveal">Un scan NFC suffit : votre client s'inscrit, laisse un avis Google, installe votre mini-app et rejoint votre programme de fidélité. Automatiquement. Sans application à télécharger.</p>
         <div class="hero__ctas reveal">
-          <a href="#demo" class="btn btn--primary btn--lg">Réserver ma démo gratuite <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+          <a href="#" data-open-demo class="btn btn--primary btn--lg">Réserver ma démo gratuite <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
           <a href="#comment-ca-marche" class="btn btn--secondary">Voir comment ça marche</a>
         </div>
         <div class="hero__proof reveal">
@@ -291,7 +291,7 @@
         </div>
       </div>
       <div style="margin-top:48px" class="reveal">
-        <a href="#demo" class="btn btn--primary btn--lg">Réserver ma démo gratuite <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+        <a href="#" data-open-demo class="btn btn--primary btn--lg">Réserver ma démo gratuite <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
       </div>
     </div>
   </section>
@@ -579,7 +579,7 @@
       <h2 class="cta-final__title reveal">Prêt à transformer chaque client en client fidèle ?</h2>
       <p class="cta-final__subtitle reveal">Réservez une démonstration gratuite de 15 minutes. On vous montre comment Fidelavis peut booster vos avis Google et votre fidélisation client. Sans engagement.</p>
       <div class="reveal">
-        <a href="mailto:contact@fidelavis.com?subject=Demande de démo Fidelavis" class="btn btn--white btn--lg">Réserver ma démo gratuite <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+        <a href="#" data-open-demo class="btn btn--white btn--lg">Réserver ma démo gratuite <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
       </div>
       <div class="cta-final__checks reveal">
         <div class="cta-final__check">
@@ -643,7 +643,7 @@
     </div>
   </footer>
 
-  <script src="js/main.js"></script>
+  <script src="js/main.js?v=2"></script>
 
   <!-- ======================== MODAL DÉMO ======================== -->
   <div id="demo-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" hidden>
@@ -698,98 +698,5 @@
     </div>
   </div>
 
-  <script>
-  (function() {
-    // Open modal
-    function openModal() {
-      var m = document.getElementById('demo-modal');
-      m.hidden = false;
-      document.body.style.overflow = 'hidden';
-      setTimeout(function(){ m.classList.add('modal--open'); }, 10);
-      document.getElementById('f-prenom').focus();
-    }
-    function closeModal() {
-      var m = document.getElementById('demo-modal');
-      m.classList.remove('modal--open');
-      setTimeout(function(){ m.hidden = true; document.body.style.overflow = ''; }, 300);
-    }
-
-    // Wire up all CTA buttons
-    document.querySelectorAll('a[href="#demo"], a[href*="mailto"]').forEach(function(btn) {
-      btn.addEventListener('click', function(e) {
-        e.preventDefault();
-        openModal();
-      });
-    });
-    // Nav CTA
-    document.querySelectorAll('.nav__cta a').forEach(function(btn) {
-      btn.addEventListener('click', function(e) {
-        e.preventDefault();
-        openModal();
-      });
-    });
-
-    document.getElementById('modal-overlay').addEventListener('click', closeModal);
-    document.getElementById('modal-close').addEventListener('click', closeModal);
-    document.getElementById('modal-close-success').addEventListener('click', closeModal);
-
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') closeModal();
-    });
-
-    // Form submit → Formsubmit.co AJAX
-    document.getElementById('demo-form').addEventListener('submit', function(e) {
-      e.preventDefault();
-      var form = this;
-      var prenom = document.getElementById('f-prenom').value.trim();
-      var nom = document.getElementById('f-nom').value.trim();
-      var entreprise = document.getElementById('f-entreprise').value.trim();
-      var telephone = document.getElementById('f-telephone').value.trim();
-      var email = document.getElementById('f-email').value.trim();
-      var errEl = document.getElementById('form-error');
-
-      if (!prenom || !nom || !entreprise || !telephone || !email) {
-        errEl.hidden = false;
-        return;
-      }
-      errEl.hidden = true;
-
-      var btnLabel = document.getElementById('btn-label');
-      var btnLoader = document.getElementById('btn-loader');
-      var submitBtn = document.getElementById('form-submit-btn');
-      btnLabel.hidden = true;
-      btnLoader.hidden = false;
-      submitBtn.disabled = true;
-
-      fetch('https://formsubmit.co/ajax/support@fidelavis.com', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({
-          _subject: 'Nouvelle demande de démo — ' + prenom + ' ' + nom,
-          _captcha: 'false',
-          Prénom: prenom,
-          Nom: nom,
-          Entreprise: entreprise,
-          Téléphone: telephone,
-          Email: email
-        })
-      })
-      .then(function(r) { return r.json(); })
-      .then(function(data) {
-        document.getElementById('form-container').hidden = true;
-        document.getElementById('success-prenom').textContent = prenom;
-        document.getElementById('form-success').hidden = false;
-        form.reset();
-      })
-      .catch(function() {
-        btnLabel.hidden = false;
-        btnLoader.hidden = true;
-        submitBtn.disabled = false;
-        errEl.textContent = 'Erreur réseau. Réessayez ou contactez support@fidelavis.com';
-        errEl.hidden = false;
-      });
-    });
-  })();
-  </script>
 </body>
 </html>
