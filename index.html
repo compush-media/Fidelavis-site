@@ -644,5 +644,152 @@
   </footer>
 
   <script src="js/main.js"></script>
+
+  <!-- ======================== MODAL DÉMO ======================== -->
+  <div id="demo-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" hidden>
+    <div class="modal__overlay" id="modal-overlay"></div>
+    <div class="modal__box">
+      <button class="modal__close" id="modal-close" aria-label="Fermer">&times;</button>
+      <div id="form-container">
+        <div class="modal__header">
+          <h3 id="modal-title" class="modal__title">Réserver ma démo gratuite</h3>
+          <p class="modal__subtitle">Notre équipe vous rappelle sous 24h. Sans engagement.</p>
+        </div>
+        <form id="demo-form" novalidate>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="f-prenom">Prénom *</label>
+              <input type="text" id="f-prenom" name="prenom" placeholder="Marc" required>
+            </div>
+            <div class="form-group">
+              <label for="f-nom">Nom *</label>
+              <input type="text" id="f-nom" name="nom" placeholder="Dupont" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="f-entreprise">Nom de l'entreprise *</label>
+            <input type="text" id="f-entreprise" name="entreprise" placeholder="Le Resto du Coin" required>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="f-telephone">Téléphone *</label>
+              <input type="tel" id="f-telephone" name="telephone" placeholder="06 12 34 56 78" required>
+            </div>
+            <div class="form-group">
+              <label for="f-email">Email *</label>
+              <input type="email" id="f-email" name="email" placeholder="marc@monentreprise.fr" required>
+            </div>
+          </div>
+          <div id="form-error" class="form-error" hidden>Veuillez remplir tous les champs.</div>
+          <button type="submit" class="btn btn--primary btn--lg form-submit" id="form-submit-btn">
+            <span id="btn-label">Envoyer ma demande</span>
+            <span id="btn-loader" hidden>Envoi en cours…</span>
+          </button>
+        </form>
+      </div>
+      <div id="form-success" hidden>
+        <div class="modal__success">
+          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          <h3>Demande envoyée !</h3>
+          <p>Merci <strong id="success-prenom"></strong>, nous vous contactons dans les 24h.</p>
+          <button class="btn btn--primary" id="modal-close-success">Fermer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  (function() {
+    // Open modal
+    function openModal() {
+      var m = document.getElementById('demo-modal');
+      m.hidden = false;
+      document.body.style.overflow = 'hidden';
+      setTimeout(function(){ m.classList.add('modal--open'); }, 10);
+      document.getElementById('f-prenom').focus();
+    }
+    function closeModal() {
+      var m = document.getElementById('demo-modal');
+      m.classList.remove('modal--open');
+      setTimeout(function(){ m.hidden = true; document.body.style.overflow = ''; }, 300);
+    }
+
+    // Wire up all CTA buttons
+    document.querySelectorAll('a[href="#demo"], a[href*="mailto"]').forEach(function(btn) {
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        openModal();
+      });
+    });
+    // Nav CTA
+    document.querySelectorAll('.nav__cta a').forEach(function(btn) {
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        openModal();
+      });
+    });
+
+    document.getElementById('modal-overlay').addEventListener('click', closeModal);
+    document.getElementById('modal-close').addEventListener('click', closeModal);
+    document.getElementById('modal-close-success').addEventListener('click', closeModal);
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeModal();
+    });
+
+    // Form submit → Formsubmit.co AJAX
+    document.getElementById('demo-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      var form = this;
+      var prenom = document.getElementById('f-prenom').value.trim();
+      var nom = document.getElementById('f-nom').value.trim();
+      var entreprise = document.getElementById('f-entreprise').value.trim();
+      var telephone = document.getElementById('f-telephone').value.trim();
+      var email = document.getElementById('f-email').value.trim();
+      var errEl = document.getElementById('form-error');
+
+      if (!prenom || !nom || !entreprise || !telephone || !email) {
+        errEl.hidden = false;
+        return;
+      }
+      errEl.hidden = true;
+
+      var btnLabel = document.getElementById('btn-label');
+      var btnLoader = document.getElementById('btn-loader');
+      var submitBtn = document.getElementById('form-submit-btn');
+      btnLabel.hidden = true;
+      btnLoader.hidden = false;
+      submitBtn.disabled = true;
+
+      fetch('https://formsubmit.co/ajax/support@fidelavis.com', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          _subject: 'Nouvelle demande de démo — ' + prenom + ' ' + nom,
+          _captcha: 'false',
+          Prénom: prenom,
+          Nom: nom,
+          Entreprise: entreprise,
+          Téléphone: telephone,
+          Email: email
+        })
+      })
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        document.getElementById('form-container').hidden = true;
+        document.getElementById('success-prenom').textContent = prenom;
+        document.getElementById('form-success').hidden = false;
+        form.reset();
+      })
+      .catch(function() {
+        btnLabel.hidden = false;
+        btnLoader.hidden = true;
+        submitBtn.disabled = false;
+        errEl.textContent = 'Erreur réseau. Réessayez ou contactez support@fidelavis.com';
+        errEl.hidden = false;
+      });
+    });
+  })();
+  </script>
 </body>
 </html>
