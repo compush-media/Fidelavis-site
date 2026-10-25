@@ -1,0 +1,788 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Audit de votre fiche Google · Fidelavis</title>
+    <style>
+    :root {
+      --fond: #F5F5F3;
+      --carte: #FFFFFF;
+      --encre: #17201B;
+      --texte: #33403A;
+      --doux: #5F6B65;
+      --trait: #E7E7E3;
+      --vert: #1F7A55;
+      --vert-clair: #E3F1EA;
+      --orange: #A8521C;
+      --orange-clair: #FBEADF;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      background: var(--fond);
+      color: var(--encre);
+      font: 16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    main {
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 24px 16px 40px;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .surtitre {
+      color: var(--doux);
+      font-size: 15px;
+      margin: 0;
+    }
+    h1 {
+      font-size: 26px;
+      line-height: 1.2;
+      margin: 2px 0 0;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      overflow-wrap: anywhere;
+    }
+    .marque {
+      flex: none;
+      background: var(--vert-clair);
+      color: var(--vert);
+      font-weight: 700;
+      font-size: 14px;
+      padding: 6px 12px;
+      border-radius: 999px;
+    }
+    .carte {
+      background: var(--carte);
+      border-radius: 24px;
+      padding: 22px 20px;
+      margin-bottom: 16px;
+      box-shadow: 0 1px 2px rgba(23, 32, 27, 0.05);
+    }
+    .etiquette {
+      color: var(--vert);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin: 0 0 10px;
+    }
+    .requete {
+      color: var(--doux);
+      margin: 0;
+    }
+    .position {
+      font-size: 64px;
+      font-weight: 800;
+      line-height: 1;
+      margin: 10px 0 8px;
+      letter-spacing: -0.03em;
+    }
+    .position .suffixe {
+      font-size: 30px;
+      vertical-align: top;
+      margin-left: 2px;
+    }
+    .position.absente {
+      font-size: 28px;
+      letter-spacing: 0;
+    }
+    .sous {
+      color: var(--doux);
+      margin: 0;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 15px;
+    }
+    th {
+      text-align: right;
+      color: var(--doux);
+      font-weight: 600;
+      font-size: 13px;
+      padding: 0 0 8px 8px;
+    }
+    th:first-child {
+      text-align: left;
+      padding-left: 0;
+    }
+    td {
+      padding: 12px 0 12px 8px;
+      border-top: 1px solid var(--trait);
+      text-align: right;
+      vertical-align: top;
+    }
+    td:first-child {
+      text-align: left;
+      color: var(--doux);
+      padding-left: 0;
+    }
+    td:not(:first-child) {
+      white-space: nowrap;
+    }
+    td.vous {
+      font-weight: 700;
+    }
+    td.retard {
+      color: var(--orange);
+    }
+    td.avance {
+      color: var(--vert);
+    }
+    .legende {
+      color: var(--doux);
+      font-size: 13px;
+      margin: 12px 0 0;
+    }
+    ol.actions {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    ol.actions li {
+      display: flex;
+      gap: 14px;
+      padding: 14px 0;
+      border-top: 1px solid var(--trait);
+    }
+    ol.actions li:first-child {
+      border-top: 0;
+      padding-top: 4px;
+    }
+    .numero {
+      flex: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--vert-clair);
+      color: var(--vert);
+      font-weight: 800;
+      display: grid;
+      place-items: center;
+    }
+    .titre-action {
+      font-weight: 700;
+      margin: 0 0 2px;
+      font-size: 17px;
+      line-height: 1.3;
+    }
+    .texte-action {
+      margin: 0;
+      color: var(--texte);
+    }
+    ul.offre {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    ul.offre li {
+      display: flex;
+      gap: 12px;
+      padding: 8px 0;
+    }
+    ul.offre svg {
+      flex: none;
+      margin-top: 3px;
+    }
+    ul.offre strong {
+      display: block;
+    }
+    ul.offre span {
+      color: var(--texte);
+    }
+    .bouton {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 56px;
+      padding: 0 16px;
+      border-radius: 16px;
+      background: var(--vert);
+      color: #FFFFFF;
+      font-weight: 700;
+      font-size: 18px;
+      text-decoration: none;
+      text-align: center;
+    }
+    .bouton.second {
+      background: var(--carte);
+      color: var(--encre);
+      border: 1.5px solid var(--trait);
+      margin-top: 10px;
+      font-size: 16px;
+    }
+    .a-configurer {
+      outline: 2px dashed var(--orange);
+      outline-offset: 3px;
+    }
+    .apercu {
+      background: var(--orange-clair);
+      color: var(--orange);
+      font-size: 14px;
+      padding: 10px 14px;
+      border-radius: 12px;
+      margin: 0 0 16px;
+    }
+    footer {
+      color: var(--doux);
+      font-size: 13px;
+      padding: 8px 4px;
+    }
+    footer p {
+      margin: 0 0 8px;
+    }
+    footer a {
+      color: inherit;
+    }
+    button.bouton {
+      width: 100%;
+      border: 0;
+      font-family: inherit;
+      cursor: pointer;
+    }
+    .bouton[disabled] {
+      opacity: 0.6;
+      cursor: default;
+    }
+    .formulaire {
+      margin-top: 18px;
+      padding-top: 16px;
+      border-top: 1px solid var(--trait);
+    }
+    .formulaire h2 {
+      font-size: 19px;
+      line-height: 1.3;
+      margin: 0 0 4px;
+    }
+    .formulaire .aide {
+      color: var(--doux);
+      font-size: 14px;
+      margin: 0 0 4px;
+    }
+    .formulaire label {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      margin: 12px 0 4px;
+    }
+    .formulaire input[type="text"],
+    .formulaire input[type="email"],
+    .formulaire input[type="tel"] {
+      width: 100%;
+      min-height: 48px;
+      padding: 10px 12px;
+      border: 1.5px solid var(--trait);
+      border-radius: 12px;
+      font: inherit;
+      color: var(--encre);
+      background: var(--carte);
+    }
+    .formulaire input:focus {
+      outline: 2px solid var(--vert);
+      outline-offset: 1px;
+    }
+    .formulaire label.accord {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      font-weight: 400;
+      color: var(--texte);
+      margin: 16px 0;
+    }
+    .accord input {
+      flex: none;
+      width: 20px;
+      height: 20px;
+      margin: 2px 0 0;
+      accent-color: var(--vert);
+    }
+    .confidentialite {
+      color: var(--doux);
+      font-size: 13px;
+      margin: 12px 0 16px;
+    }
+    .confidentialite a {
+      color: inherit;
+    }
+    .erreur {
+      color: var(--orange);
+      font-size: 14px;
+      margin: 10px 0 0;
+    }
+    .succes {
+      background: var(--vert-clair);
+      color: var(--vert);
+      border-radius: 12px;
+      padding: 14px;
+      font-weight: 600;
+      margin: 16px 0 0;
+    }
+    .contact {
+      margin-top: 18px;
+      padding-top: 16px;
+      border-top: 1px solid var(--trait);
+    }
+    .contact p {
+      margin: 0 0 6px;
+    }
+    .liens-contact {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 18px;
+    }
+    .liens-contact a {
+      color: var(--vert);
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .lien-bouton {
+      background: none;
+      border: 0;
+      padding: 0;
+      font: inherit;
+      color: inherit;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+    </style>
+  </head>
+  <body>
+    <main id="audit">
+      <p class="sous">Chargement de votre audit…</p>
+    </main>
+    <script>
+    // Lecture des audits publiés et suivi des demandes (fonction Supabase « audit »).
+    // L'aperçu local fournit window.AUDIT à la place.
+    const ADRESSE_DONNEES = "https://rtdiaeskmyjjwohirhzj.supabase.co/functions/v1/audit";
+    // Même envoi que le formulaire « Réserver ma démo » du site : un e-mail à l'équipe.
+    const ADRESSE_FORMULAIRE = "https://formsubmit.co/ajax/support@fidelavis.com";
+
+    const FORMULAIRES = {
+      essai: {
+        titre: "Essayer Fidelavis 15 jours gratuitement",
+        aide:
+          "Sans carte bancaire et sans engagement. Nous vous recontactons très vite pour lancer votre essai.",
+        champs: (c) => [
+          ["fiche", "Nom de votre fiche Google", "text", c.prospect.nom, "organization"],
+          ["metier", "Votre métier", "text", c.metier, null],
+          ["prenom", "Prénom", "text", "", "given-name"],
+          ["email", "E-mail", "email", "", "email"],
+          ["telephone", "Téléphone", "tel", "", "tel"],
+        ],
+        accord: "J'accepte que Fidelavis me contacte au sujet de cet essai.",
+        sujet: (c) => `Essai 15 jours — ${c.prospect.nom} (audit)`,
+        envoi: "Demander mon essai gratuit",
+      },
+      rdv: {
+        titre: "Prendre rendez-vous",
+        aide: "Un échange pour parler de votre fiche, sans engagement.",
+        champs: (c) => [
+          ["prenom", "Prénom", "text", "", "given-name"],
+          ["nom", "Nom", "text", "", "family-name"],
+          ["entreprise", "Nom de l'entreprise", "text", c.prospect.nom, "organization"],
+          ["telephone", "Téléphone", "tel", "", "tel"],
+          ["email", "E-mail", "email", "", "email"],
+        ],
+        accord: null,
+        sujet: (c) => `Rendez-vous — ${c.prospect.nom} (audit)`,
+        envoi: "Envoyer ma demande",
+      },
+    };
+
+    function el(balise, attributs, ...enfants) {
+      const noeud = document.createElement(balise);
+      for (const [nom, valeur] of Object.entries(attributs ?? {})) {
+        if (valeur !== null && valeur !== undefined && valeur !== false) {
+          noeud.setAttribute(nom, valeur === true ? "" : valeur);
+        }
+      }
+      for (const enfant of enfants.flat(Infinity)) {
+        if (enfant === null || enfant === undefined || enfant === false) continue;
+        noeud.append(typeof enfant === "string" ? document.createTextNode(enfant) : enfant);
+      }
+      return noeud;
+    }
+
+    const jeton = new URLSearchParams(location.search).get("j");
+
+    async function charger() {
+      if (window.AUDIT) return window.AUDIT;
+      if (!jeton) throw new Error("audit introuvable");
+      const reponse = await fetch(`${ADRESSE_DONNEES}?j=${encodeURIComponent(jeton)}`);
+      if (!reponse.ok) throw new Error("audit introuvable");
+      return reponse.json();
+    }
+
+    function signaler(action) {
+      return fetch(ADRESSE_DONNEES, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ j: jeton, action }),
+      });
+    }
+
+    function carte(etiquette, ...contenu) {
+      return el("section", { class: "carte" }, el("p", { class: "etiquette" }, etiquette), ...contenu);
+    }
+
+    function blocPosition(c) {
+      const reference = c.est_premier ? `Le 2e : ${c.reference.nom}` : `Le 1er : ${c.reference.nom}`;
+      const position = c.position === null
+        ? el("p", { class: "position absente" }, "Hors des résultats relevés")
+        : el(
+          "p",
+          { class: "position" },
+          String(c.position),
+          el("span", { class: "suffixe" }, c.position === 1 ? "er" : "e"),
+        );
+      return carte(
+        "Votre position",
+        el("p", { class: "requete" }, `Sur « ${c.mot_cle} » dans Google Maps`),
+        position,
+        el(
+          "p",
+          { class: "sous" },
+          c.est_premier ? `Vous êtes en tête. ${reference}.` : `${reference}.`,
+        ),
+      );
+    }
+
+    function blocComparatif(c) {
+      const titre = c.est_premier ? "Le 2e" : "Le 1er";
+      const lignes = c.comparatif.map((l) =>
+        el(
+          "tr",
+          {},
+          el("td", {}, l.libelle),
+          el(
+            "td",
+            { class: `vous ${l.ecart === "retard" || l.ecart === "avance" ? l.ecart : ""}` },
+            l.vous.texte,
+          ),
+          el("td", {}, l.reference.texte),
+        )
+      );
+      return carte(
+        c.est_premier ? "Vous face au 2e" : "Vous face au 1er",
+        el(
+          "table",
+          {},
+          el("thead", {}, el("tr", {}, el("th", {}, ""), el("th", {}, "Vous"), el("th", {}, titre))),
+          el("tbody", {}, lignes),
+        ),
+        el(
+          "p",
+          { class: "legende" },
+          "En vert, ce que vous faites mieux ; en orange, votre marge de progrès.",
+        ),
+      );
+    }
+
+    function blocActions(c, page) {
+      const titre = c.est_premier ? "Pour garder votre place" : "Vos 3 actions prioritaires";
+      if (c.actions.length === 0) {
+        return page.apercu
+          ? carte(titre, el("p", { class: "sous a-configurer" }, "Rédaction des actions en attente."))
+          : null;
+      }
+      return carte(
+        titre,
+        el(
+          "ol",
+          { class: "actions" },
+          c.actions.map((a, i) =>
+            el(
+              "li",
+              {},
+              el("span", { class: "numero" }, String(i + 1)),
+              el(
+                "div",
+                {},
+                el("p", { class: "titre-action" }, a.titre),
+                el("p", { class: "texte-action" }, a.texte),
+              ),
+            )
+          ),
+        ),
+      );
+    }
+
+    function coche() {
+      const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+      svg.setAttribute("width", "20");
+      svg.setAttribute("height", "20");
+      svg.setAttribute("viewBox", "0 0 20 20");
+      svg.setAttribute("aria-hidden", "true");
+      svg.innerHTML =
+        '<path d="M4 10.5l4 4 8-9" fill="none" stroke="#1F7A55" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>';
+      return svg;
+    }
+
+    function blocOffre() {
+      const points = [
+        [
+          "Plus d'avis, dans les règles Google",
+          "Une carte de fidélité dans le téléphone de vos clients. Après chaque visite, une demande d'avis part automatiquement, à tous, jamais sur place.",
+        ],
+        [
+          "Une action par jour, en 2 minutes",
+          "Chaque matin, sur votre téléphone, la chose utile à faire pour votre fiche : photo, réponse à un avis, publication, prête à valider.",
+        ],
+        [
+          "Le suivi du 1er de votre quartier",
+          "Chaque soir, nous regardons ce qui change sur sa fiche, pour que vous sachiez quoi faire.",
+        ],
+      ];
+      return carte(
+        "Ce que Fidelavis fait pour vous",
+        el(
+          "ul",
+          { class: "offre" },
+          points.map(([titre, texte]) =>
+            el("li", {}, coche(), el("div", {}, el("strong", {}, titre), el("span", {}, texte)))
+          ),
+        ),
+      );
+    }
+
+    function formulaire(type, c, page) {
+      const modele = FORMULAIRES[type];
+      const champs = modele.champs(c);
+      const erreur = el("p", { class: "erreur", hidden: true });
+      const bouton = el("button", { class: "bouton", type: "submit" }, modele.envoi);
+      const accord = modele.accord
+        ? el(
+          "label",
+          { class: "accord" },
+          el("input", { type: "checkbox", name: "accord", required: true }),
+          el("span", {}, modele.accord),
+        )
+        : null;
+      const form = el(
+        "form",
+        { class: "formulaire", novalidate: true },
+        el("h2", {}, modele.titre),
+        el("p", { class: "aide" }, modele.aide),
+        champs.map(([nom, libelle, typeChamp, valeur, autocomplete]) => [
+          el("label", { for: `${type}-${nom}` }, `${libelle} *`),
+          el("input", {
+            id: `${type}-${nom}`,
+            name: nom,
+            type: typeChamp,
+            value: valeur || null,
+            autocomplete,
+            required: true,
+          }),
+        ]),
+        accord,
+        el(
+          "p",
+          { class: "confidentialite" },
+          "Vos coordonnées servent uniquement à vous recontacter. ",
+          el("a", { href: "/politique-de-confidentialite.html" }, "Politique de confidentialité"),
+          ".",
+        ),
+        bouton,
+        erreur,
+      );
+
+      form.addEventListener("submit", async (evenement) => {
+        evenement.preventDefault();
+        const donnees = Object.fromEntries(new FormData(form));
+        const manquant = champs.some(([nom]) => !String(donnees[nom] ?? "").trim()) ||
+          (modele.accord && !donnees.accord);
+        if (manquant) {
+          erreur.textContent = modele.accord
+            ? "Veuillez remplir tous les champs et cocher la case d'accord."
+            : "Veuillez remplir tous les champs.";
+          erreur.hidden = false;
+          return;
+        }
+        if (page.apercu) {
+          erreur.textContent = "Aperçu interne : l'envoi est désactivé.";
+          erreur.hidden = false;
+          return;
+        }
+        erreur.hidden = true;
+        bouton.disabled = true;
+        bouton.textContent = "Envoi en cours…";
+        const message = {
+          _subject: modele.sujet(c),
+          _captcha: "false",
+          Demande: modele.titre,
+          "Audit de": c.prospect.nom,
+          "Mot-clé": c.mot_cle,
+          Position: c.position ?? "hors des résultats relevés",
+          "Lien de l'audit": location.href,
+        };
+        for (const [nom, libelle] of champs) message[libelle] = String(donnees[nom]).trim();
+        if (modele.accord) message["Accord pour être contacté"] = "oui";
+        try {
+          const reponse = await fetch(ADRESSE_FORMULAIRE, {
+            method: "POST",
+            headers: { "Content-Type": "application/json", Accept: "application/json" },
+            body: JSON.stringify(message),
+          });
+          if (!reponse.ok) throw new Error("envoi refusé");
+          // Suivi de la demande : seule la date est enregistrée, jamais les coordonnées.
+          signaler(type).catch(() => {});
+          const prenom = String(donnees.prenom).trim();
+          form.replaceChildren(
+            el(
+              "p",
+              { class: "succes" },
+              `Merci ${prenom}, votre demande est bien envoyée. Nous vous recontactons très vite.`,
+            ),
+          );
+        } catch {
+          bouton.disabled = false;
+          bouton.textContent = modele.envoi;
+          erreur.textContent = page.contact?.email
+            ? `L'envoi n'a pas abouti. Réessayez, ou écrivez à ${page.contact.email}.`
+            : "L'envoi n'a pas abouti. Réessayez dans un instant.";
+          erreur.hidden = false;
+        }
+      });
+      return form;
+    }
+
+    function blocContact(contact) {
+      if (!contact) return null;
+      const telephone = contact.telephone ? contact.telephone.replace(/[^\d+]/g, "") : null;
+      const liens = [
+        telephone ? el("a", { href: `tel:${telephone}` }, "Appeler") : null,
+        telephone?.startsWith("+")
+          ? el(
+            "a",
+            { href: `https://wa.me/${telephone.slice(1)}`, target: "_blank", rel: "noopener" },
+            "WhatsApp",
+          )
+          : null,
+        contact.email ? el("a", { href: `mailto:${contact.email}` }, "E-mail") : null,
+      ];
+      return el(
+        "div",
+        { class: "contact" },
+        el(
+          "p",
+          {},
+          "Votre contact : ",
+          el("strong", {}, contact.prenom),
+          contact.role ? ` · ${contact.role}` : "",
+        ),
+        el("div", { class: "liens-contact" }, liens),
+      );
+    }
+
+    function blocPassage(c, page) {
+      const zone = el("div");
+      const ouvrir = (type) => {
+        zone.replaceChildren(formulaire(type, c, page));
+        zone.querySelector("input")?.focus();
+      };
+      const essai = el("button", { class: "bouton", type: "button" }, "Essayer 15 jours gratuitement");
+      const rdv = el("button", { class: "bouton second", type: "button" }, "Prendre rendez-vous");
+      essai.addEventListener("click", () => ouvrir("essai"));
+      rdv.addEventListener("click", () => ouvrir("rdv"));
+      return el("section", { class: "carte" }, essai, rdv, zone, blocContact(page.contact));
+    }
+
+    function piedDePage(c, page) {
+      const date = new Date(c.releve_le).toLocaleDateString(c.langue, {
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+      });
+      const desinscription = el("p", {});
+      const bouton = el(
+        "button",
+        { class: "lien-bouton", type: "button" },
+        "Ne plus être contacté par Fidelavis",
+      );
+      desinscription.append("Vous ne souhaitez plus être contacté ? ", bouton, ".");
+      bouton.addEventListener("click", async () => {
+        if (page.apercu) {
+          desinscription.textContent = "Aperçu interne : la désinscription est désactivée.";
+          return;
+        }
+        bouton.disabled = true;
+        try {
+          const reponse = await signaler("desinscription");
+          if (!reponse.ok) throw new Error("désinscription refusée");
+          desinscription.textContent = "C'est noté : Fidelavis ne vous contactera plus.";
+        } catch {
+          bouton.disabled = false;
+          desinscription.append(" La demande n'a pas abouti, réessayez.");
+        }
+      });
+      return el(
+        "footer",
+        {},
+        el(
+          "p",
+          {},
+          `Audit gratuit réalisé par Fidelavis à partir des données publiques de Google Maps, relevées le ${date} depuis le centre de la zone « ${c.zone} ». Le classement varie selon l'endroit d'où l'on cherche ; aucune position n'est garantie.`,
+        ),
+        desinscription,
+        el(
+          "p",
+          {},
+          el("a", { href: "/mentions-legales.html" }, "Mentions légales"),
+          " · ",
+          el("a", { href: "/politique-de-confidentialite.html" }, "Politique de confidentialité"),
+        ),
+      );
+    }
+
+    function afficher({ contenu: c, page }) {
+      document.title = `Audit de ${c.prospect.nom} · Fidelavis`;
+      // replaceChildren écrirait « null » en toutes lettres : les blocs absents sont retirés avant.
+      const blocs = [
+        page.apercu
+          ? el(
+            "p",
+            { class: "apercu" },
+            "Aperçu interne : les envois sont désactivés et la page n'est pas publiée.",
+          )
+          : null,
+        el(
+          "header",
+          {},
+          el(
+            "div",
+            {},
+            el("p", { class: "surtitre" }, "Audit gratuit de votre fiche Google"),
+            el("h1", {}, c.prospect.nom),
+          ),
+          el("span", { class: "marque" }, "Fidelavis"),
+        ),
+        blocPosition(c),
+        blocComparatif(c),
+        blocActions(c, page),
+        blocOffre(),
+        blocPassage(c, page),
+        piedDePage(c, page),
+      ];
+      document.getElementById("audit").replaceChildren(...blocs.filter(Boolean));
+    }
+
+    charger().then(afficher).catch(() => {
+      document.getElementById("audit").replaceChildren(
+        el("p", { class: "sous" }, "Cet audit n'est pas disponible. Le lien a peut-être expiré."),
+      );
+    });
+    </script>
+  </body>
+</html>
