@@ -432,11 +432,15 @@
     }
 
     const jeton = new URLSearchParams(location.search).get("j");
+    // Ouverture depuis le CRM audit : la fonction ne la compte pas comme une ouverture du restaurant.
+    const interne = new URLSearchParams(location.search).get("src") === "interne";
 
     async function charger() {
       if (window.AUDIT) return window.AUDIT;
       if (!jeton) throw new Error("audit introuvable");
-      const reponse = await fetch(`${ADRESSE_DONNEES}?j=${encodeURIComponent(jeton)}`);
+      const reponse = await fetch(
+        `${ADRESSE_DONNEES}?j=${encodeURIComponent(jeton)}${interne ? "&src=interne" : ""}`,
+      );
       if (!reponse.ok) throw new Error("audit introuvable");
       return reponse.json();
     }
