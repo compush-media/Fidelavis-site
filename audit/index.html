@@ -101,6 +101,21 @@
       color: var(--doux);
       margin: 0;
     }
+    .autre-position {
+      border-top: 1px solid var(--trait);
+      margin-top: 16px;
+      padding-top: 14px;
+    }
+    .autre-position .position {
+      font-size: 40px;
+      margin: 6px 0 6px;
+    }
+    .autre-position .position .suffixe {
+      font-size: 20px;
+    }
+    .autre-position .position.absente {
+      font-size: 22px;
+    }
     table {
       width: 100%;
       border-collapse: collapse;
@@ -457,25 +472,41 @@
       return el("section", { class: "carte" }, el("p", { class: "etiquette" }, etiquette), ...contenu);
     }
 
+    function rang(position, absente) {
+      return position === null ? el("p", { class: "position absente" }, absente) : el(
+        "p",
+        { class: "position" },
+        String(position),
+        el("span", { class: "suffixe" }, position === 1 ? "er" : "e"),
+      );
+    }
+
     function blocPosition(c) {
       const reference = c.est_premier ? `Le 2e : ${c.reference.nom}` : `Le 1er : ${c.reference.nom}`;
-      const position = c.position === null
-        ? el("p", { class: "position absente" }, "Hors des résultats relevés")
-        : el(
-          "p",
-          { class: "position" },
-          String(c.position),
-          el("span", { class: "suffixe" }, c.position === 1 ? "er" : "e"),
-        );
+      // Audits de version 2 : la recherche du métier seul (« plombier »), depuis le même point.
+      const autres = (c.autres_positions ?? []).map((a) =>
+        el(
+          "div",
+          { class: "autre-position" },
+          el("p", { class: "requete" }, `Sur « ${a.mot_cle} » tout court`),
+          rang(a.position, `Au-delà des ${a.profondeur} premiers résultats`),
+          el(
+            "p",
+            { class: "sous" },
+            "Ce que voit un client du quartier qui cherche sur son téléphone.",
+          ),
+        )
+      );
       return carte(
         "Votre position",
         el("p", { class: "requete" }, `Sur « ${c.mot_cle} » dans Google Maps`),
-        position,
+        rang(c.position, "Hors des résultats relevés"),
         el(
           "p",
           { class: "sous" },
           c.est_premier ? `Vous êtes en tête. ${reference}.` : `${reference}.`,
         ),
+        autres,
       );
     }
 
@@ -684,6 +715,10 @@
           "Audit de": c.prospect.nom,
           "Mot-clé": c.mot_cle,
           Position: c.position ?? "hors des résultats relevés",
+          ...Object.fromEntries((c.autres_positions ?? []).map((a) => [
+            `Position sur « ${a.mot_cle} »`,
+            a.position ?? `au-delà des ${a.profondeur} premiers`,
+          ])),
           "Lien de l'audit": location.href,
         };
         for (const [nom, libelle] of champs) message[libelle] = String(donnees[nom]).trim();
