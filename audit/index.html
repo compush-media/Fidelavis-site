@@ -397,24 +397,25 @@
     // Lecture des audits publiés et suivi des demandes (fonction Supabase « audit »).
     // L'aperçu local fournit window.AUDIT à la place.
     const ADRESSE_DONNEES = "https://rtdiaeskmyjjwohirhzj.supabase.co/functions/v1/audit";
-    // Même envoi que le formulaire « Réserver ma démo » du site : un e-mail à l'équipe.
+    // Rendez-vous : même envoi que le formulaire « Réserver ma démo » du site, un e-mail à l'équipe.
     const ADRESSE_FORMULAIRE = "https://formsubmit.co/ajax/support@fidelavis.com";
+    // Essai : inscription automatique (compte, lien de connexion, bienvenue), sans intervention.
+    const ADRESSE_INSCRIPTION = "https://rtdiaeskmyjjwohirhzj.supabase.co/functions/v1/agent";
 
     const FORMULAIRES = {
       essai: {
         titre: "Essayer Fidelavis 15 jours gratuitement",
-        aide:
-          "Sans carte bancaire et sans engagement. Nous vous recontactons très vite pour lancer votre essai.",
-        champs: (c) => [
-          ["fiche", "Nom de votre fiche Google", "text", c.prospect.nom, "organization"],
-          ["metier", "Votre métier", "text", c.metier, null],
+        aide: "Sans carte bancaire et sans engagement. Votre accès arrive par e-mail dans la minute.",
+        champs: () => [
           ["prenom", "Prénom", "text", "", "given-name"],
           ["email", "E-mail", "email", "", "email"],
           ["telephone", "Téléphone", "tel", "", "tel"],
         ],
         accord: "J'accepte que Fidelavis me contacte au sujet de cet essai.",
+        confidentialite:
+          "Vos coordonnées servent à ouvrir votre accès et à vous envoyer les messages de votre essai. ",
         sujet: (c) => `Essai 15 jours — ${c.prospect.nom} (audit)`,
-        envoi: "Demander mon essai gratuit",
+        envoi: "Commencer mon essai gratuit",
       },
       rdv: {
         titre: "Prendre rendez-vous",
@@ -427,6 +428,7 @@
           ["email", "E-mail", "email", "", "email"],
         ],
         accord: null,
+        confidentialite: "Vos coordonnées servent uniquement à vous recontacter. ",
         sujet: (c) => `Rendez-vous — ${c.prospect.nom} (audit)`,
         envoi: "Envoyer ma demande",
       },
@@ -680,7 +682,7 @@
         el(
           "p",
           { class: "confidentialite" },
-          "Vos coordonnées servent uniquement à vous recontacter. ",
+          modele.confidentialite,
           el("a", { href: "/politique-de-confidentialite.html" }, "Politique de confidentialité"),
           ".",
         ),
@@ -708,6 +710,10 @@
         erreur.hidden = true;
         bouton.disabled = true;
         bouton.textContent = "Envoi en cours…";
+        if (type === "essai") {
+          await inscrire(form, bouton, erreur, modele, donnees);
+          return;
+        }
         const message = {
           _subject: modele.sujet(c),
           _captcha: "false",
@@ -750,6 +756,51 @@
         }
       });
       return form;
+    }
+
+    // Essai : le compte est créé et le lien de connexion part tout de suite, sans personne entre les deux.
+    async function inscrire(form, bouton, erreur, modele, donnees) {
+      const prenom = String(donnees.prenom).trim();
+      const email = String(donnees.email).trim();
+      let reponse;
+      let resultat = {};
+      try {
+        reponse = await fetch(ADRESSE_INSCRIPTION, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            action: "inscription",
+            j: jeton,
+            prenom,
+            email,
+            telephone: String(donnees.telephone).trim(),
+            accord: true,
+          }),
+        });
+        resultat = await reponse.json().catch(() => ({}));
+      } catch {
+        reponse = null;
+      }
+      if (reponse?.ok) {
+        form.replaceChildren(
+          el(
+            "p",
+            { class: "succes" },
+            resultat.deja_inscrit
+              ? "Un accès existe déjà pour cette fiche : un nouveau lien de connexion vient de partir à l'adresse enregistrée."
+              : `C'est parti, ${prenom} ! Votre accès vient de partir à ${email}. Ouvrez l'e-mail sur votre téléphone pour commencer votre essai.`,
+          ),
+        );
+        return;
+      }
+      bouton.disabled = false;
+      bouton.textContent = modele.envoi;
+      erreur.textContent = reponse?.status === 409
+        ? "Cette adresse sert déjà pour une autre fiche. Indiquez une autre adresse e-mail."
+        : reponse?.status === 400
+        ? "Vérifiez votre adresse e-mail et la case d'accord."
+        : "L'inscription n'a pas abouti. Réessayez dans quelques minutes.";
+      erreur.hidden = false;
     }
 
     function blocContact(contact) {
