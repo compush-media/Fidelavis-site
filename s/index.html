@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Désinscription · Fidelavis</title>
+    <style>
+    :root {
+      --fond: #F5F5F3;
+      --carte: #FFFFFF;
+      --encre: #17201B;
+      --doux: #5F6B65;
+      --vert: #1F7A55;
+    }
+    body {
+      margin: 0;
+      background: var(--fond);
+      color: var(--encre);
+      font: 17px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    main {
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 48px 16px;
+    }
+    .carte {
+      background: var(--carte);
+      border-radius: 24px;
+      padding: 24px 20px;
+      box-shadow: 0 1px 2px rgba(23, 32, 27, 0.05);
+    }
+    h1 {
+      font-size: 24px;
+      line-height: 1.2;
+      margin: 0 0 10px;
+    }
+    p {
+      margin: 0 0 12px;
+      color: var(--doux);
+    }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section class="carte">
+        <h1 id="titre">Désinscription en cours…</h1>
+        <p id="texte"></p>
+      </section>
+    </main>
+    <script>
+      "use strict";
+      // Lien du SMS de demande d'avis : fidelavis.com/s/?CODE. Un seul clic suffit : la désinscription
+      // est enregistrée dès l'ouverture de la page.
+      const ADRESSE = "https://rtdiaeskmyjjwohirhzj.supabase.co/functions/v1/lien";
+      const code = location.search.slice(1);
+      const titre = document.getElementById("titre");
+      const texte = document.getElementById("texte");
+      fetch(ADRESSE, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action: "desinscrire", code }),
+      })
+        .then((reponse) => reponse.ok ? reponse.json() : Promise.reject(reponse.status))
+        .then(({ nom }) => {
+          titre.textContent = "C'est fait";
+          texte.textContent = `Vous ne recevrez plus de demande d'avis de ${nom}.`;
+        })
+        .catch((statut) => {
+          titre.textContent = statut === 404 ? "Lien inconnu" : "Un problème est survenu";
+          texte.textContent = statut === 404
+            ? "Ce lien de désinscription n'est pas valable."
+            : "Votre désinscription n'a pas pu être enregistrée. Réessayez dans un instant.";
+        });
+    </script>
+  </body>
+</html>
