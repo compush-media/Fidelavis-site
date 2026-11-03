@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Action du jour · Fidelavis</title>
+    <style>
+    :root {
+      --fond: #F5F5F3;
+      --carte: #FFFFFF;
+      --encre: #17201B;
+      --doux: #5F6B65;
+      --vert: #1F7A55;
+      --vert-clair: #E6F2EC;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      background: var(--fond);
+      color: var(--encre);
+      font: 17px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    main {
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 32px 16px 48px;
+    }
+    .carte {
+      background: var(--carte);
+      border-radius: 24px;
+      padding: 24px 20px;
+      margin-bottom: 16px;
+      box-shadow: 0 1px 2px rgba(23, 32, 27, 0.05);
+    }
+    .etiquette {
+      color: var(--vert);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin: 0 0 8px;
+    }
+    h1 {
+      font-size: 24px;
+      line-height: 1.2;
+      margin: 0 0 10px;
+    }
+    p {
+      margin: 0 0 12px;
+    }
+    .doux {
+      color: var(--doux);
+    }
+    .avis {
+      background: var(--fond);
+      border-radius: 14px;
+      padding: 12px 14px;
+      margin: 0 0 12px;
+    }
+    .avis p {
+      margin: 0 0 4px;
+    }
+    textarea {
+      width: 100%;
+      min-height: 140px;
+      border: 1px solid #D9DED9;
+      border-radius: 14px;
+      padding: 12px;
+      font: inherit;
+      color: inherit;
+      margin: 0 0 12px;
+      resize: vertical;
+    }
+    .bouton {
+      display: block;
+      width: 100%;
+      border: 0;
+      border-radius: 14px;
+      padding: 15px 16px;
+      margin: 0 0 10px;
+      background: var(--vert);
+      color: #fff;
+      font: 600 17px/1.2 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      text-align: center;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .bouton.secondaire {
+      background: var(--vert-clair);
+      color: var(--vert);
+    }
+    .bouton:disabled {
+      opacity: 0.6;
+    }
+    .lien {
+      background: none;
+      border: 0;
+      padding: 0;
+      color: var(--doux);
+      font: inherit;
+      font-size: 15px;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+    .succes {
+      color: var(--vert);
+      font-weight: 600;
+    }
+    .pied {
+      text-align: center;
+      font-size: 15px;
+    }
+    [hidden] {
+      display: none !important;
+    }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section class="carte" id="action">
+        <p class="etiquette" id="etiquette">Action du jour</p>
+        <h1 id="titre">Chargement…</h1>
+        <p id="message"></p>
+        <div class="avis" id="avis" hidden>
+          <p id="avis-auteur"></p>
+          <p class="doux" id="avis-texte"></p>
+        </div>
+        <textarea id="texte" aria-label="Texte proposé, modifiable" hidden></textarea>
+        <button class="bouton secondaire" id="copier" type="button" hidden>Copier le texte</button>
+        <a class="bouton" id="fiche" target="_blank" rel="noopener" hidden>Ouvrir la fiche Google</a>
+        <button class="bouton secondaire" id="fait" type="button" hidden>C'est fait</button>
+        <p class="succes" id="merci" hidden>C'est noté, merci. Elle est marquée faite pour vous deux.</p>
+      </section>
+      <p class="doux pied" id="relais" hidden></p>
+      <p class="pied" id="retrait" hidden>
+        <button class="lien" id="retirer" type="button">Ne plus recevoir ces SMS</button>
+      </p>
+    </main>
+    <script>
+      "use strict";
+      // Lien du SMS envoyé au délégué à 19 h 30 : fidelavis.com/d/?CODE, valable le jour de l'action.
+      // Le délégué lit l'action, copie le texte, ouvre la fiche Google, la marque faite ou se retire.
+      const ADRESSE = "https://rtdiaeskmyjjwohirhzj.supabase.co/functions/v1/lien";
+      const code = location.search.slice(1);
+      const $ = (id) => document.getElementById(id);
+      const appeler = (action) =>
+        fetch(ADRESSE, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ action, code }),
+        }).then((reponse) => reponse.ok ? reponse.json() : Promise.reject(reponse.status));
+
+      function fin(titre, texte) {
+        $("etiquette").textContent = "Fidelavis Agent";
+        $("titre").textContent = titre;
+        $("message").textContent = texte;
+        for (const id of ["avis", "texte", "copier", "fiche", "fait", "merci", "relais", "retrait"]) $(id).hidden = true;
+      }
+
+      appeler("delegue")
+        .then((a) => {
+          $("etiquette").textContent = `Action du jour · ${a.nom}`;
+          $("titre").textContent = a.titre;
+          $("message").textContent = a.message;
+          if (a.avis) {
+            const note = a.avis.note ? "★".repeat(Math.round(a.avis.note)) + " " : "";
+            $("avis-auteur").textContent = `${note}${a.avis.auteur_prenom ?? "Un client"}`;
+            $("avis-texte").textContent = a.avis.texte ? `« ${a.avis.texte} »` : "";
+            $("avis").hidden = false;
+          }
+          if (a.contenu_propose) {
+            $("texte").value = a.contenu_propose;
+            $("texte").hidden = false;
+            $("copier").hidden = false;
+          }
+          $("fiche").href = a.fiche;
+          $("fiche").hidden = false;
+          $("relais").textContent =
+            `Vous recevez ce SMS parce que ${a.nom} vous a indiqué comme relais pour sa fiche Google.`;
+          $("relais").hidden = false;
+          $("retrait").hidden = false;
+          if (a.faite) $("merci").hidden = false;
+          else $("fait").hidden = false;
+        })
+        .catch((statut) => {
+          if (statut === 404) {
+            fin("Lien expiré", "Ce lien n'est valable que le jour de l'action. La prochaine arrivera par SMS.");
+          } else {
+            fin("Un problème est survenu", "La page n'a pas pu se charger. Réessayez dans un instant.");
+          }
+        });
+
+      $("copier").addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText($("texte").value);
+        } catch {
+          $("texte").select();
+          document.execCommand("copy");
+        }
+        $("copier").textContent = "Texte copié ✓";
+      });
+
+      $("fait").addEventListener("click", () => {
+        $("fait").disabled = true;
+        appeler("delegue_fait")
+          .then(() => {
+            $("fait").hidden = true;
+            $("merci").hidden = false;
+          })
+          .catch(() => {
+            $("fait").disabled = false;
+            $("fait").textContent = "Réessayer : c'est fait";
+          });
+      });
+
+      $("retirer").addEventListener("click", () => {
+        if (!confirm("Vous ne recevrez plus les actions de cette fiche par SMS. Confirmer ?")) return;
+        appeler("delegue_retirer")
+          .then(({ nom }) => fin("C'est fait", `Vous ne recevrez plus les actions de ${nom}.`))
+          .catch(() => alert("Le retrait n'a pas pu être enregistré. Réessayez dans un instant."));
+      });
+    </script>
+  </body>
+</html>
