@@ -387,6 +387,98 @@
       text-decoration: underline;
       cursor: pointer;
     }
+
+    /* Mini-audit après un appel (contenu « appel-1 »). */
+    ol.faits {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    ol.faits li {
+      display: flex;
+      gap: 14px;
+      padding: 12px 0;
+      border-top: 1px solid var(--trait);
+      color: var(--texte);
+    }
+    ol.faits li:first-child {
+      border-top: 0;
+      padding-top: 2px;
+    }
+    .note-reco {
+      background: var(--vert-clair);
+      color: var(--vert);
+      border-radius: 12px;
+      padding: 10px 14px;
+      font-size: 14px;
+      font-weight: 600;
+      margin: 14px 0 0;
+    }
+    .titre-preuve {
+      font-weight: 700;
+      margin: 0 0 2px;
+    }
+    .preuve + .preuve {
+      border-top: 1px solid var(--trait);
+      margin-top: 18px;
+      padding-top: 16px;
+    }
+    table.liste td:first-child {
+      width: 2.6em;
+    }
+    table.liste td:nth-child(2) {
+      text-align: left;
+      white-space: normal;
+      overflow-wrap: anywhere;
+    }
+    table.liste tr.vous td {
+      background: var(--vert-clair);
+      color: var(--vert);
+      font-weight: 700;
+    }
+    table.liste tr.saut td {
+      color: var(--doux);
+      text-align: center;
+      padding: 4px 0;
+    }
+    table.points th:nth-child(3) {
+      text-align: left;
+    }
+    table.points td:nth-child(2) {
+      font-weight: 700;
+    }
+    table.points td:nth-child(3) {
+      text-align: left;
+      white-space: normal;
+      color: var(--doux);
+      font-size: 14px;
+    }
+    .actions-page {
+      display: grid;
+      gap: 10px;
+    }
+    .actions-page .bouton.second {
+      margin-top: 0;
+    }
+    @media print {
+      body {
+        background: #FFFFFF;
+        font-size: 13px;
+      }
+      main {
+        max-width: none;
+        padding: 0 8px;
+      }
+      .carte {
+        box-shadow: none;
+        border: 1px solid var(--trait);
+        break-inside: avoid;
+      }
+      .sans-impression,
+      .apercu {
+        display: none !important;
+      }
+    }
     </style>
   </head>
   <body>
@@ -452,11 +544,16 @@
     // Ouverture depuis le CRM audit : la fonction ne la compte pas comme une ouverture du restaurant.
     const interne = new URLSearchParams(location.search).get("src") === "interne";
 
+    // Aperçu interne d'un mini-audit (relecture de Jc) : second jeton, tout statut, envois désactivés.
+    const jetonApercu = new URLSearchParams(location.search).get("apercu");
+
     async function charger() {
       if (window.AUDIT) return window.AUDIT;
-      if (!jeton) throw new Error("audit introuvable");
+      if (!jeton && !jetonApercu) throw new Error("audit introuvable");
       const reponse = await fetch(
-        `${ADRESSE_DONNEES}?j=${encodeURIComponent(jeton)}${interne ? "&src=interne" : ""}`,
+        jetonApercu
+          ? `${ADRESSE_DONNEES}?apercu=${encodeURIComponent(jetonApercu)}`
+          : `${ADRESSE_DONNEES}?j=${encodeURIComponent(jeton)}${interne ? "&src=interne" : ""}`,
       );
       if (!reponse.ok) throw new Error("audit introuvable");
       return reponse.json();
@@ -889,7 +986,239 @@
       );
     }
 
-    function afficher({ contenu: c, page }) {
+    // --- Mini-audit après un appel (contenu « appel-1 ») -------------------------------------------
+    // Tout ce qui est chiffré vient du contenu calculé par le code ; la page ne fait que l'afficher.
+    const SUPPORT = "support@fidelavis.com";
+    const COTES = { N: "Nord", E: "Est", S: "Sud", O: "Ouest" };
+    const DU_COTE = { N: "au nord", E: "à l'est", S: "au sud", O: "à l'ouest" };
+
+    const dateLongue = (iso) =>
+      new Date(iso).toLocaleDateString("fr-FR", {
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+        timeZone: "Europe/Paris",
+      });
+    const distance = (m) => (m >= 1000 ? `${String(m / 1000).replace(".", ",")} km` : `${m} m`);
+    const place = (p) => (p === null ? "absent" : p === 1 ? "1re" : `${p}e`);
+    const avis = (n) => (n === null || n === undefined ? "—" : `${n}\u00a0avis`);
+
+    function blocFaits(c) {
+      return carte(
+        "Ce que nous avons relevé",
+        el(
+          "ol",
+          { class: "faits" },
+          c.faits.map((f, i) =>
+            el("li", {}, el("span", { class: "numero" }, String(i + 1)), el("span", {}, f.texte))
+          ),
+        ),
+      );
+    }
+
+    function blocRecommandation(c, page) {
+      const r = c.recommandation;
+      if (!r.titre || !r.texte) {
+        return page.apercu
+          ? carte(
+            "Notre recommandation",
+            el("p", { class: "sous a-configurer" }, "Recommandation pas encore rédigée."),
+          )
+          : null;
+      }
+      return carte(
+        "Notre recommandation",
+        el("p", { class: "titre-action" }, r.titre),
+        el("p", { class: "texte-action" }, r.texte),
+        el(
+          "p",
+          { class: "note-reco" },
+          "C'est la première action que Fidelavis Agent vous préparera si vous l'essayez.",
+        ),
+      );
+    }
+
+    function blocPreuves(c) {
+      const p = c.preuve;
+      const lignes = [];
+      p.resultats.forEach((r, i) => {
+        const precedent = p.resultats[i - 1];
+        if (precedent && r.position > precedent.position + 1) {
+          lignes.push(el("tr", { class: "saut" }, el("td", { colspan: "3" }, "…")));
+        }
+        lignes.push(
+          el(
+            "tr",
+            { class: r.vous ? "vous" : null },
+            el("td", {}, `${r.position}`),
+            el("td", {}, r.vous ? `${r.nom} (vous)` : r.nom),
+            el("td", {}, avis(r.avis)),
+          ),
+        );
+      });
+      const liste = el(
+        "div",
+        { class: "preuve" },
+        el(
+          "p",
+          { class: "titre-preuve" },
+          `Les résultats Google Maps pour «\u00a0${p.mot_cle}\u00a0», ${distance(p.distance_m)} ${
+            DU_COTE[p.cote]
+          } de chez vous`,
+        ),
+        el("p", { class: "sous" }, `Relevé du ${dateLongue(p.releve_le)}.`),
+        el("table", { class: "liste" }, el("tbody", {}, lignes)),
+      );
+      const tableaux = c.grille.map((g) =>
+        el(
+          "div",
+          { class: "preuve" },
+          el(
+            "p",
+            { class: "titre-preuve" },
+            `«\u00a0${g.mot_cle}\u00a0» à ${distance(c.distance_m)} de chez vous, de chaque côté`,
+          ),
+          el("p", { class: "sous" }, `Relevé du ${dateLongue(c.grille_releve_le)}.`),
+          el(
+            "table",
+            { class: "points" },
+            el(
+              "thead",
+              {},
+              el("tr", {}, el("th", {}, "Côté"), el("th", {}, "Vous"), el("th", {}, "Le 1er")),
+            ),
+            el(
+              "tbody",
+              {},
+              g.points.map((pt) =>
+                el(
+                  "tr",
+                  {},
+                  el("td", {}, COTES[pt.cote]),
+                  el("td", { class: "vous" }, place(pt.position)),
+                  el(
+                    "td",
+                    {},
+                    pt.position === 1 || !pt.premier
+                      ? "vous"
+                      : `${pt.premier.nom} · ${avis(pt.premier.avis)}`,
+                  ),
+                )
+              ),
+            ),
+          ),
+        )
+      );
+      return carte("Les preuves", liste, tableaux);
+    }
+
+    function blocEssaiAppel(c, page) {
+      const zone = el("div");
+      const essai = el(
+        "button",
+        { class: "bouton", type: "button" },
+        "Essayer 15 jours gratuitement",
+      );
+      essai.addEventListener("click", () => {
+        zone.replaceChildren(formulaire("essai", c, page));
+        zone.querySelector("input")?.focus();
+      });
+      const points = [
+        ["Une action par jour sur votre téléphone", "La première : la recommandation ci-dessus."],
+        ["Surveillance du premier", "Fidelavis vous prévient de ses changements importants."],
+        [
+          "Demandes d'avis après chaque intervention",
+          "Envoyées à tous vos clients, sans rien sur place.",
+        ],
+      ];
+      return el(
+        "section",
+        { class: "carte sans-impression" },
+        el("p", { class: "etiquette" }, "Allez plus loin avec Fidelavis Agent"),
+        el(
+          "ul",
+          { class: "offre" },
+          points.map(([titre, texte]) =>
+            el("li", {}, coche(), el("div", {}, el("strong", {}, titre), el("span", {}, texte)))
+          ),
+        ),
+        essai,
+        el(
+          "p",
+          { class: "mention-essai" },
+          "15 jours gratuits · Sans carte bancaire · Sans engagement",
+        ),
+        zone,
+      );
+    }
+
+    function blocOutils() {
+      const pdf = el("button", { class: "bouton second", type: "button" }, "Télécharger en PDF");
+      pdf.addEventListener("click", () => window.print());
+      return el(
+        "section",
+        { class: "carte actions-page sans-impression" },
+        pdf,
+        el(
+          "a",
+          {
+            class: "bouton second",
+            href: `mailto:${SUPPORT}?subject=${encodeURIComponent("Question sur mon audit")}`,
+          },
+          "Une question ? Écrivez-nous",
+        ),
+      );
+    }
+
+    function piedAppel(c, page) {
+      const pied = piedDePage(
+        { ...c, releve_le: c.grille_releve_le, langue: "fr-FR", zone: "" },
+        page,
+      );
+      pied.firstChild.textContent =
+        "Audit gratuit réalisé par Fidelavis à partir des données publiques de Google Maps, aux dates indiquées. Le classement varie selon l'endroit d'où l'on cherche ; aucune position n'est garantie. " +
+        `Une question : ${SUPPORT}.`;
+      return pied;
+    }
+
+    function afficherAppel({ contenu: c, page }) {
+      document.title = `Audit de ${c.prospect.nom} · Fidelavis`;
+      const libelles = { brouillon: "à relire", a_revoir: "à revoir", valide: "publié" };
+      const blocs = [
+        page.apercu
+          ? el(
+            "p",
+            { class: "apercu" },
+            `Aperçu interne (${
+              libelles[page.statut] ?? page.statut ?? "aperçu"
+            }) : les envois sont désactivés.`,
+            page.desinscrit ? " Ce prospect est désinscrit : rien ne doit lui être envoyé." : "",
+          )
+          : null,
+        el(
+          "header",
+          {},
+          el(
+            "div",
+            {},
+            el("p", { class: "surtitre" }, "Votre audit gratuit, comme convenu au téléphone"),
+            el("h1", {}, c.prospect.nom),
+          ),
+          el("span", { class: "marque" }, "Fidelavis"),
+        ),
+        blocFaits(c),
+        blocRecommandation(c, page),
+        blocPreuves(c),
+        blocEssaiAppel(c, page),
+        blocOutils(),
+        piedAppel(c, page),
+      ];
+      document.getElementById("audit").replaceChildren(...blocs.filter(Boolean));
+    }
+
+    function afficher(donnees) {
+      if (donnees.contenu?.version === "appel-1") return afficherAppel(donnees);
+      const { contenu: c, page } = donnees;
       document.title = `Audit de ${c.prospect.nom} · Fidelavis`;
       // replaceChildren écrirait « null » en toutes lettres : les blocs absents sont retirés avant.
       const blocs = [
